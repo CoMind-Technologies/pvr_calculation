@@ -1,0 +1,105 @@
+## Poetry configuration
+[tool.poetry]
+name = "mc_analysis"
+version = "0.0.1"
+description = "Time-of-flight resolved MC simulations of pulsatile BFI"
+authors = ["Dominic Hill <dominic@comind.io>"]
+license = "Proprietary - CoMind Techologies Limited - All rights reserved"
+readme = "README.md"
+repository = "https://github.com/CoMind-Technologies/mc_analysis/"
+packages = [
+  { include = "mc_analysis", from = "." }
+]
+
+# A list of patterns that will be included in the final package.
+include = [
+  "mc_analysis/py.typed",
+  "mc_analysis/commit.txt"
+]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[[tool.poetry.source]]
+name = "PyPI"
+priority = "primary"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+toml = "*"
+# The below line causes poetry install to fail. Therefore, we recommend installing pymcx manually or copying the
+# file: https://github.com/4D42/pymcx/blob/master/pymcx/load_mch.py directly into the project and updating paths.
+#pymcx = { git = "https://github.com/4D42/pymcx/" }
+matplotlib = "*"
+numpy = "*"
+pandas = "*"
+scipy = "^1.14.1"
+gitpython = "^3.1.43"
+h5py = "*"
+pyarrow = "*"
+tqdm = "*"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pytest-cov = "*"
+coverage = { extras = ["toml"], version = "*" }
+taskipy = "^1.10.3"
+pre-commit = "^3.0.4"
+ruff = "^0.0.259"
+
+[tool.poetry.scripts]
+# Entry point for the package
+# can be run  by "poetry run mc_fitting"
+"mc_fitting" = "mc_fitting.__main__:main"
+
+
+## MYPY configuration
+[tool.mypy]
+mypy_path = "$MYPY_CONFIG_FILE_DIR/stubs"
+files = "mc_fitting"
+strict = true
+show_error_codes = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+warn_unreachable = true
+exclude = ["mc_fitting/tests"]
+
+# Modules with known missing library stubs
+[[tool.mypy.overrides]]
+module = []
+ignore_missing_imports = true
+
+## Pytest run and coverage configuration
+[tool.coverage.run]
+omit = ["*/tests/*"]
+
+[tool.coverage.report]
+exclude_lines = ["pass"]
+omit = ["*/tests/*"]
+
+
+[tool.ruff]
+line-length=120
+select = [
+  "E", "F", "W", # flake8 style linter
+  "I",           # isort - sort imports
+##"UP",          # pyupgrade - upgrades to use modern python features
+]
+exclude = [
+    ".git",
+    "__pycache__",
+    "build",
+    "stubs"
+]
+
+
+[tool.taskipy.tasks]
+# Run ruff
+ruff = "poetry run ruff check ./mc_analysis --fix"
+
+# Run tests
+test = "pytest -vv ./mc_fitting/tests"
+test_coverage = "pytest -vv --cov=. ./mc_fitting/tests --cov-report xml:coverage.xml"
+test_coverage_html = "pytest  --cov-report html:test-cov.html --cov=mc_fitting"
+
+
