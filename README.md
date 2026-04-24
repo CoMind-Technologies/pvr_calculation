@@ -53,16 +53,16 @@ Arguments:
     --ending: File ending to match (default: `.hdf5`)
     --outdir: Output directory for fit results (default: data/segmentation_and_pvr_results/)
 ```
-Results are saved as `pvr.hdf5` files in the specified output directory.
+Results are saved as 
 
 
 ### Plotting the results - stacked segmented pulses with calculated PVR values in the legend.
 To plot the results run the following script:
 ```commandline
-python pvr_analysis/examples/plot_results.py --file </path/to/segmentation_and_pvr_results_results>
+
 ```
 where
-- `--file`: Path to the folder with `pvr.hdf5` and `segmented_bfi.hdf5` files.
+- `--file`: 
 
 
 ## Citation

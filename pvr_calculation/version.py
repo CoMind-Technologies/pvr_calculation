@@ -1,4 +1,4 @@
-# mc_analysis.is developed using the version philosophy described here: https://semver.org/
+# pvr_calculation is versioned per https://semver.org/
 import importlib.metadata
 from pathlib import Path
 

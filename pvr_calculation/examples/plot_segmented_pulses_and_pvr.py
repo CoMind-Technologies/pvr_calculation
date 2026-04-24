@@ -3,10 +3,10 @@ import numpy as np
 from matplotlib import gridspec
 from matplotlib import pyplot as plt
 
-from mc_analysis.fitting.correlation_metrics import get_td_metrics
-from mc_analysis.fitting.loaders import load_fit
-from mc_analysis.utils.absolute_paths import DATA_PATH
-from mc_analysis.utils.plotting import save_fig
+from pvr_calculation.fitting.correlation_metrics import get_td_metrics
+from pvr_calculation.fitting.loaders import load_fit
+from pvr_calculation.utils.absolute_paths import DATA_PATH
+from pvr_calculation.utils.plotting import save_fig
 
 
 def normalise(_bfi):
