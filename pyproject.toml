@@ -11,10 +11,12 @@ packages = [
   { include = "pvr_calculation", from = "." }
 ]
 
-# A list of patterns that will be included in the final package.
+# Non-Python files shipped with the package (example traces for installed wheels).
 include = [
   "pvr_calculation/py.typed",
-  "pvr_calculation/commit.txt"
+  "pvr_calculation/commit.txt",
+  { path = "pvr_calculation/data/time_series_data/bfi.npy", format = ["sdist", "wheel"] },
+  { path = "pvr_calculation/data/time_series_data/abp.npy", format = ["sdist", "wheel"] },
 ]
 
 [build-system]

@@ -1,0 +1,9 @@
+{
+    "method": "foGD",
+    "method_preproc": "ssf",
+    "warp": true,
+    "warp_len": 151,
+    "peak_sign_detect": 1,
+    "prominence_ratio": null,
+    "ref_indices": null
+}

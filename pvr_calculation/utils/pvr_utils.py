@@ -35,6 +35,7 @@ def pvr(data: NDArray[np.number], within_axis: int, across_axis: int):
         axis=(across_axis, within_axis),
     )
 
+
 def batch_pvr(
     data: NDArray[np.number], batch_size: int, within_axis: int, across_axis: int
 ):

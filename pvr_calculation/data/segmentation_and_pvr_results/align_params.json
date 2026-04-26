@@ -1,0 +1,6 @@
+{
+    "method": "troughs",
+    "use_xcorr": false,
+    "warp_len": 151,
+    "fixed_offset": 5
+}

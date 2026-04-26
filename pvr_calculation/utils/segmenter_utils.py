@@ -8,9 +8,11 @@ import traceback
 from pathlib import Path
 from typing import Optional, Union
 
+import matplotlib.pyplot as plt
 from scipy.signal import find_peaks
 
-from comind_utils.dsp.segmentation import segmenter_utils as segutils
+import pvr_calculation.utils.align_signals as dsp
+from pvr_calculation.utils.align_signals import AlignSignals, split_continuous
 
 
 def batch(
@@ -160,16 +162,16 @@ class Segmenter:
                 )
                 edges = find_peaks(
                     self.seg_source,
-                    distance=segutils.min_peak_distance(self.seg_source, self.fs),
+                    distance=dsp.min_peak_distance(self.seg_source, self.fs),
                     prominence=prominence_threshold,
                 )[0]
             else:
                 edges = find_peaks(
                     self.seg_source,
-                    distance=segutils.min_peak_distance(self.seg_source, self.fs),
+                    distance=dsp.min_peak_distance(self.seg_source, self.fs),
                 )[0]
         elif method == "foGD":
-            edges = segutils.detect_beats_fogd(self.seg_source, self.fs)
+            edges = dsp.detect_beats_fogd(self.seg_source, self.fs)
         elif method == "indices":
             edges = self.ref_indices
         else:
@@ -180,7 +182,7 @@ class Segmenter:
         segments = np.split(self.data, edges)
         segments = segments[1:-1]
         if self.warp:
-            segments = segutils.aggregate(segments, self.warp_len)
+            segments = dsp.aggregate(segments, self.warp_len)
         else:
             segments = np.array(
                 list(itertools.zip_longest(*segments, fillvalue=np.nan))
@@ -199,9 +201,9 @@ class Segmenter:
         """
         transf_data = np.array(self.data.copy())
         transf_data *= peak_sign
-        transf_data = segutils.highpass_filter(transf_data, cutoff, self.fs, order)
+        transf_data = dsp.highpass_filter(transf_data, cutoff, self.fs, order)
         if method_preproc == "ssf":
-            transf_data = segutils.ssf_(transf_data, self.fs)
+            transf_data = dsp.ssf_(transf_data, self.fs)
         elif method_preproc is None:
             transf_data = transf_data
         else:
