@@ -61,7 +61,7 @@ From the repository root, using the bundled example files and a sampling rate th
 poetry run python -m pvr_calculation.examples.run_segmentation_and_pvr_calculation \
     --bfi pvr_calculation/data/time_series_data/bfi.npy \
     --abp pvr_calculation/data/time_series_data/abp.npy \
-    --fs 47.62
+    --fs 47.68
 ```
 
 If you omit **`--outdir`**, outputs go to **`./pvr_calculation/data/segmentation_and_pvr_results/`** (under the same directory you run from — keep your cwd at the repository root so that path matches the layout above).
@@ -73,7 +73,7 @@ If you omit **`--outdir`**, outputs go to **`./pvr_calculation/data/segmentation
 | `--fs` | yes | Sampling rate of both signals (Hz) |
 | `--outdir` | no | Output directory (default: `./pvr_calculation/data/segmentation_and_pvr_results` relative to cwd) |
 | `--tof_ix` | no | TOF index for multi-TOF BFI alignment (default: `6`) |
-| `--n-pulses` | no | Pulses per PVR estimate, 1-D and 3-D BFI (default: `10`) |
+| `--n-pulses` | no | Pulses per PVR estimate, 1-D and 2-D BFI (default: `10`) |
 | `--figure-name` | no | PNG filename under `data/figures/` (default: `<bfi_stem>_segmented_pulses_mean_pvr.png`) |
 | `--no-figure` | no | Skip writing the figure |
 
