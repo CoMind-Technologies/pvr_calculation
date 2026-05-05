@@ -15,7 +15,7 @@ conda activate pvr_calculation
 poetry install
 ```
 
-Use `poetry run …` or `poetry shell` so commands use this environment. Dependencies are declared in `pyproject.toml` (core numerics: `numpy`, `scipy`, `matplotlib`, plus other packages listed there). Segmentation and FIR helpers used by `Segmenter` / `AlignSignals` live in `pvr_calculation/utils/align_signals.py` and are **self-contained** (no `comind_utils` import).
+Use `poetry run …` or `poetry shell` so commands use this environment. Dependencies are declared in `pyproject.toml` (core numerics: `numpy`, `scipy`, `matplotlib`, plus other packages listed there). 
 
 
 ## Directory layout
